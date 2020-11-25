@@ -40,8 +40,7 @@
     ]
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown",
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,css,md}": ["prettier --write","./node_modules/.bin/eslint --fix"]
   },
   "husky": {
     "hooks": {
