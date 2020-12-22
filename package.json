@@ -52,8 +52,7 @@
     ],
     "**/*.+(css|scss)": [
       "./node_modules/.bin/prettier --write",
-      "./node_modules/.bin/stylelint *.css --fix",
-      "git add"
+      "./node_modules/.bin/stylelint *.css --fix"
     ]
   },
   "husky": {
