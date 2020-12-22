@@ -46,9 +46,14 @@
     ]
   },
   "lint-staged": {
-    "*.{js,css,md}": [
+    "*.{js,md}": [
       "prettier --write",
       "./node_modules/.bin/eslint --fix"
+    ],
+    "**/*.+(css|scss)": [
+      "./node_modules/.bin/prettier --write",
+      "./node_modules/.bin/stylelint *.css --fix",
+      "git add"
     ]
   },
   "husky": {
