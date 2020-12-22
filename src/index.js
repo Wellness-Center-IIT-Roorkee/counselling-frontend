@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/index.css';
 
 ReactDOM.render(
   <Provider store={store}>
