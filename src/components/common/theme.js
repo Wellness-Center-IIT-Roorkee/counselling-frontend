@@ -1,6 +1,5 @@
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { variables_properties as variables } from '../../helpers/colors';
-console.log(variables);
 const fontFamilyArr = [
   '"Open Sans"',
   'sans-serif ',

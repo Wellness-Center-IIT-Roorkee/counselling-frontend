@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import illustration from '../../assets/illustrations/Group 6.svg';
+import CustomButton from '../../components/common/button';
 
 const Home = () => {
   return (
@@ -25,12 +26,20 @@ const Home = () => {
               share any problem.
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <Button color="primary" variant="contained">
-                mango
-              </Button>
-            </Col>
+          <Row className="mt-4 ">
+            <CustomButton
+              className="mr-4 ml-3"
+              color="secondary"
+              variant="contained"
+              label="BOOK APPOINTMENTI"
+            />
+
+            <CustomButton
+              className="ml-5"
+              color="secondary"
+              variant="outlined"
+              label="Know the counselors"
+            />
           </Row>
         </Col>
         <Col>

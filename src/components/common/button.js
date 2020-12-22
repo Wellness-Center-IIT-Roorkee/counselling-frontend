@@ -37,6 +37,19 @@ const useStyles = makeStyles(theme => ({
       cursor: 'not-allowed',
     },
   },
+  containedSecondary: {
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.white,
+
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.hover,
+    },
+    '&:disabled': {
+      backgroundColor: theme.palette.secondary.disabled,
+      color: theme.palette.common.white,
+      cursor: 'not-allowed',
+    },
+  },
   containedBlue: {
     backgroundColor: theme.palette.primary.A15,
     color: theme.palette.primary.main,
@@ -90,6 +103,29 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: 'Transparent',
       borderColor: theme.palette.primary.disabled,
       color: theme.palette.primary.disabled,
+      cursor: 'not-allowed',
+    },
+  },
+  outlinedSecondary: {
+    backgroundColor: 'Transparent',
+    border: '1px',
+    borderStyle: 'solid',
+    borderColor: theme.palette.secondary.main,
+    color: theme.palette.secondary.main,
+    '&:hover': {
+      backgroundColor: 'Transparent',
+      borderColor: theme.palette.secondary.hover,
+      color: theme.palette.secondary.hover,
+    },
+    '&:active': {
+      borderColor: theme.palette.secondary.active,
+      backgroundColor: 'Transparent',
+      color: theme.palette.secondary.active,
+    },
+    '&:disabled': {
+      backgroundColor: 'Transparent',
+      borderColor: theme.palette.secondary.disabled,
+      color: theme.palette.secondary.disabled,
       cursor: 'not-allowed',
     },
   },
