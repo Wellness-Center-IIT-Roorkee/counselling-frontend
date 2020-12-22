@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import illustration from '../../assets/illustrations/Group 6.svg';
+
 const Home = () => {
   return (
     <div style={{ height: '100vh', position: 'relative' }}>
