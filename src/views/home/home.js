@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import illustration from '../../assets/illustrations/Group 6.svg';
@@ -22,6 +23,13 @@ const Home = () => {
             <Col>
               The counselor’s forum is an open, receptive and safe forum to
               share any problem.
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button color="primary" variant="contained">
+                mango
+              </Button>
             </Col>
           </Row>
         </Col>
