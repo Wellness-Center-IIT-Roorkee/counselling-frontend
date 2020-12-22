@@ -1,23 +1,32 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import illustration from '../../assets/illustrations/Group 6.svg';
 
 const Home = () => {
   return (
     <div style={{ height: '100vh', position: 'relative' }}>
       <Row className="align-items-center my-auto h-100 mx-5">
-        <Col>
-          <Row className={'text-blue-800'}>Appointment Booking Portal</Row>
-          <Row>
-            It is not unusual for you to experience social, personal, or
-            academic problems in your day to day life. The growing pressure to
-            excel everywhere often leads to emotional or psychological turmoil,
-            thus disturbing one‘s peace of mind. The counselor’s forum is an
-            open, receptive and safe forum to share any problem.
+        <Col className="pr-5">
+          <Row className="text-blue-800 fw-500 fs-3_125 md-2">
+            <Col>Appointment Booking Portal</Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l">
+              It is not unusual for you to experience social, personal, or
+              academic problems in your day to day life. The growing pressure to
+              excel everywhere often leads to emotional or psychological
+              turmoil, thus disturbing one‘s peace of mind.
+            </Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col>
+              The counselor’s forum is an open, receptive and safe forum to
+              share any problem.
+            </Col>
           </Row>
         </Col>
         <Col>
-          <img src={illustration} />
+          <img src={illustration} width="100%" />
         </Col>
       </Row>
     </div>

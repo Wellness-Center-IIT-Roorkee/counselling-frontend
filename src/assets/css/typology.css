@@ -1,0 +1,31 @@
+.fw-bold {
+  font-weight: bold;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fs-3_125 {
+  font-size: 3.125rem;
+}
+
+.fs-xs {
+  font-size: x-small;
+}
+
+.fs-s {
+  font-size: small;
+}
+
+.fs-m {
+  font-size: medium;
+}
+
+.fs-l {
+  font-size: large;
+}
+
+.lh-1_875 {
+  line-height: 1.875rem;
+}
