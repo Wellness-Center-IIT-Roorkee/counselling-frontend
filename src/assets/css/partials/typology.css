@@ -26,6 +26,10 @@
   font-size: large;
 }
 
+.fs-xl {
+  font-size: x-large;
+}
+
 .lh-1_875 {
   line-height: 1.875rem;
 }
