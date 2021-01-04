@@ -1,8 +1,2 @@
-@import './colors.css';
-@import './variables.css';
-@import './layout.css';
-@import './typology.css';
-
-body {
-  font-family: 'roboto', sans-serif;
-}
+@import './partials/index.css';
+@import './modules/index.css';
