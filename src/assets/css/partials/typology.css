@@ -6,6 +6,10 @@
   font-weight: 500;
 }
 
+.fw-300 {
+  font-weight: 300;
+}
+
 .fs-3_125 {
   font-size: 3.125rem;
 }
@@ -28,6 +32,10 @@
 
 .fs-xl {
   font-size: x-large;
+}
+
+.fs-2 {
+  font-size: 2rem;
 }
 
 .lh-1_875 {
