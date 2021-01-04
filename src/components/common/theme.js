@@ -34,8 +34,8 @@ export const theme = createMuiTheme({
     },
     secondary: {
       main: variables.blue800,
-      hover: variables.blue600,
-      active: variables.blue600,
+      hover: variables.blue800,
+      active: variables.blue800,
       disabled: variables.blue300,
     },
     error: {

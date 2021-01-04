@@ -21,9 +21,11 @@ const useStyles = makeStyles(theme => ({
     minWidth: 'fit-content',
     lineHeight: 'unset',
   },
+
   label: {
     whiteSpace: 'nowrap',
   },
+
   containedPrimary: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
@@ -31,6 +33,7 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.primary.hover,
     },
+
     '&:disabled': {
       backgroundColor: theme.palette.primary.disabled,
       color: theme.palette.common.white,
@@ -44,6 +47,7 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.secondary.hover,
     },
+
     '&:disabled': {
       backgroundColor: theme.palette.secondary.disabled,
       color: theme.palette.common.white,
@@ -53,6 +57,7 @@ const useStyles = makeStyles(theme => ({
   containedBlue: {
     backgroundColor: theme.palette.primary.A15,
     color: theme.palette.primary.main,
+
     '&:hover': {
       backgroundColor: theme.palette.primary.A40,
     },
@@ -60,23 +65,27 @@ const useStyles = makeStyles(theme => ({
   containedOrange: {
     backgroundColor: theme.palette.error.light,
     color: theme.palette.error.main,
+
     '&:hover': {
       backgroundColor: theme.palette.error.hover,
     },
   },
   containedGreen: {
-    backgroundColor: 'Transparent',
+    backgroundColor: 'transparent',
     borderColor: theme.palette.success.main,
     color: theme.palette.success.main,
+
     '&:hover': {
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       borderColor: theme.palette.success.main,
       color: theme.palette.success.hover,
     },
+
     '&:active': {
       borderColor: theme.palette.success.active,
       color: theme.palette.primary.active,
     },
+
     '&:disabled': {
       borderColor: theme.palette.success.disabled,
       color: theme.palette.success.disabled,
@@ -84,76 +93,76 @@ const useStyles = makeStyles(theme => ({
     },
   },
   outlinedPrimary: {
-    backgroundColor: 'Transparent',
+    backgroundColor: 'transparent',
     border: '1px',
     borderStyle: 'solid',
     borderColor: theme.palette.primary.main,
     color: theme.palette.primary.main,
     '&:hover': {
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       borderColor: theme.palette.primary.hover,
       color: theme.palette.primary.hover,
     },
     '&:active': {
       borderColor: theme.palette.primary.active,
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       color: theme.palette.primary.active,
     },
     '&:disabled': {
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       borderColor: theme.palette.primary.disabled,
       color: theme.palette.primary.disabled,
       cursor: 'not-allowed',
     },
   },
   outlinedSecondary: {
-    backgroundColor: 'Transparent',
+    backgroundColor: 'transparent',
     border: '1px',
     borderStyle: 'solid',
     borderColor: theme.palette.secondary.main,
     color: theme.palette.secondary.main,
     '&:hover': {
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       borderColor: theme.palette.secondary.hover,
       color: theme.palette.secondary.hover,
     },
     '&:active': {
       borderColor: theme.palette.secondary.active,
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       color: theme.palette.secondary.active,
     },
     '&:disabled': {
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       borderColor: theme.palette.secondary.disabled,
       color: theme.palette.secondary.disabled,
       cursor: 'not-allowed',
     },
   },
   outlinedGreen: {
-    backgroundColor: 'Transparent',
+    backgroundColor: 'transparent',
     border: '1px',
     borderStyle: 'solid',
     borderColor: theme.palette.success.main,
     color: theme.palette.success.main,
     '&:hover': {
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       borderColor: theme.palette.success.hover,
       color: theme.palette.success.hover,
     },
     '&:active': {
       borderColor: theme.palette.success.active,
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       color: theme.palette.success.active,
     },
     '&:disabled': {
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
       borderColor: theme.palette.success.disabled,
       color: theme.palette.success.disabled,
       cursor: 'not-allowed',
     },
   },
   text: {
-    backgroundColor: 'Transparent',
+    backgroundColor: 'transparent',
     color: theme.palette.primary.main,
     '&:hover': {
       color: theme.palette.primary.hover,
@@ -167,24 +176,41 @@ const useStyles = makeStyles(theme => ({
     },
   },
   textPrimary: {
-    backgroundColor: 'Transparent',
+    backgroundColor: 'transparent',
     color: theme.palette.primary.main,
     '&:hover': {
       color: theme.palette.primary.hover,
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
     },
     '&:active': {
       color: theme.palette.primary.active,
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
     },
     '&:disabled': {
       color: theme.palette.primary.disabled,
       cursor: 'not-allowed',
-      backgroundColor: 'Transparent',
+      backgroundColor: 'transparent',
+    },
+  },
+  textSecondary: {
+    backgroundColor: 'transparent',
+    color: theme.palette.secondary.main,
+    '&:hover': {
+      color: theme.palette.secondary.hover,
+      backgroundColor: 'transparent',
+    },
+    '&:active': {
+      color: theme.palette.secondary.active,
+      backgroundColor: 'transparent',
+    },
+    '&:disabled': {
+      color: theme.palette.secondary.disabled,
+      cursor: 'not-allowed',
+      backgroundColor: 'transparent',
     },
   },
   textGrey: {
-    backgroundColor: 'Transparent',
+    backgroundColor: 'transparent',
     color: theme.palette.grey[500],
     '&:hover': {
       color: theme.palette.grey[500],
@@ -221,7 +247,6 @@ const CustomButton = ({
   const classes = useStyles();
 
   const customClass = variant + color.charAt(0).toUpperCase() + color.slice(1);
-
   const buttonLabel = label || 'Save';
   const lgBreakpoint = useMediaQuery(theme => theme.breakpoints.up('md'));
   buttonSize = lgBreakpoint ? buttonSize : 'medium';
@@ -244,7 +269,7 @@ const CustomButton = ({
   return (
     <Button
       color={'primary'}
-      variant="contained"
+      variant={variant}
       type="submit"
       disabled={isDisabled || spinner}
       onClick={handleSubmit}
@@ -254,6 +279,8 @@ const CustomButton = ({
       classes={{
         root: classes.root,
         containedPrimary: classes[customClass],
+        textPrimary: classes[customClass],
+        outlinedPrimary: classes[customClass],
         label: classes.label,
       }}
       className={`${propClasses} ${buttonSizeCSS}`}

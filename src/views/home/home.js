@@ -1,10 +1,12 @@
-import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import illustration from '../../assets/illustrations/Group 6.svg';
 import CustomButton from '../../components/common/button';
+import LoginModal from '../../components/home/loginModal';
 
 const Home = () => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   return (
     <div style={{ height: '100vh', position: 'relative' }}>
       <Row className="align-items-center my-auto h-100 mx-5">
@@ -32,6 +34,9 @@ const Home = () => {
               color="secondary"
               variant="contained"
               label="BOOK APPOINTMENTI"
+              handleSubmit={() => {
+                setIsLoginModalOpen(true);
+              }}
             />
 
             <CustomButton
@@ -46,6 +51,10 @@ const Home = () => {
           <img src={illustration} width="100%" />
         </Col>
       </Row>
+      <LoginModal
+        open={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
     </div>
   );
 };
