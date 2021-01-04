@@ -3,8 +3,7 @@ import DefaultLayout from './layouts/defaultLayout';
 
 import ConfirmAppointment from './views/confirmPage';
 
-import ChooseCounselor from './views/chooseCounselor/chooseCounselor';
-
+import BookAppointment from './views/bookAppointment/bookAppointment';
 
 const Home = React.lazy(() => import('./views/home/index.js'));
 
@@ -16,16 +15,15 @@ export default [
     component: () => <Home />,
   },
   {
-
     path: '/confirm',
     exact: true,
     layout: DefaultLayout,
     component: () => <ConfirmAppointment />,
-
-    path: '/choose_counselor',
+  },
+  {
+    path: '/book_appointment',
     exact: true,
     layout: DefaultLayout,
-    component: () => <ChooseCounselor />,
-
+    component: () => <BookAppointment />,
   },
 ];

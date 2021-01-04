@@ -2,9 +2,9 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 const Steps = ({
-  steps = 1,
-  currentStep = 0,
-  stepLabel = '',
+  steps,
+  currentStep,
+  stepLabel,
   isBack = true,
   onBack = () => {},
   description = '',
@@ -25,7 +25,7 @@ const Steps = ({
           <Row className="justify-content-end text-grey-400">{stepLabel}</Row>
         </Col>
       </Row>
-      <Row className="p-4 m-0 mt-4 mx-10p">
+      <Row className="p-4 m-0 mt-4 mx-5">
         <Col>
           <Row className="align-items-center">
             <span className="text-primary fs-2">{`Step: ${currentStep} `}</span>
