@@ -1,3 +1,8 @@
 export const SET_IS_LOGIN = 'SET_IS_LOGIN';
 export const SET_USER_DATA = 'SET_USER_DATA';
+
+export const GET_USER_DATA_PENDING = 'GET_USER_DATA_PENDING';
+
 export const USER_API_ERROR = 'USER_API_ERROR';
+
+export const IS_LOGIN_PENDING = 'IS_LOGIN_PENDING';

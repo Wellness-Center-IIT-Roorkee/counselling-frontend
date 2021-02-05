@@ -18,6 +18,13 @@ export const getCookie = cname => {
   return '';
 };
 
+export const deleteCookie = cname => {
+  var d = new Date();
+  d.setTime(d.getTime() - 1 * 24 * 60 * 60 * 1000);
+  var expires = 'expires=' + d.toUTCString();
+  document.cookie = cname + '=' + ';' + expires + ';path=/';
+};
+
 export const apiDispatch = (actionType = '', data) => {
   return {
     type: actionType,

@@ -1,7 +1,7 @@
 import { FormLabel, InputLabel, Select, TextField } from '@material-ui/core';
 import { React, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import { Redirect } from 'react-router';
+import { Row } from 'react-bootstrap';
+import { Redirect, useHistory } from 'react-router';
 import CounselorCard from '../../components/chooseCounselor/counselorCard';
 import BoxBackground from '../../components/common/background';
 import CustomButton from '../../components/common/button';
@@ -10,7 +10,7 @@ import { counsellors } from '../../helpers/data/counsellorData';
 
 export default function BookAppointment() {
   const [activeStep, setActiveStep] = useState(0);
-
+  const history = useHistory();
   const [state, setState] = useState({
     age: '',
     name: 'hai',
@@ -38,7 +38,11 @@ export default function BookAppointment() {
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    if (activeStep > 0) {
+      setActiveStep(prevActiveStep => prevActiveStep - 1);
+    } else {
+      history.goBack();
+    }
   };
 
   const getStepContent = step => {
