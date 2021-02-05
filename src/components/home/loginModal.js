@@ -1,6 +1,7 @@
 import { Modal, Row } from 'react-bootstrap';
 import React from 'react';
 import CustomButton from '../common/button';
+import { oauthUrl } from '../../constants';
 
 const LoginModal = ({ open = false, onClose = () => {} }) => {
   return (
@@ -18,6 +19,9 @@ const LoginModal = ({ open = false, onClose = () => {} }) => {
             color="secondary"
             variant="contained"
             buttonSize="large"
+            handleSubmit={() => {
+              window.location.assign(oauthUrl);
+            }}
           />
         </Row>
       </Modal.Body>

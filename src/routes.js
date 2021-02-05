@@ -15,6 +15,12 @@ export default [
     component: () => <Home />,
   },
   {
+    path: '/login',
+    exact: true,
+    layout: DefaultLayout,
+    component: () => <Home />,
+  },
+  {
     path: '/confirm',
     exact: true,
     layout: DefaultLayout,
