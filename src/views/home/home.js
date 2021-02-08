@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
 import illustration from '../../assets/illustrations/Group 6.svg';
 import CustomButton from '../../components/common/button';
 import LoginModal from '../../components/home/loginModal';
 
 const Home = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const isLoggedIn = useSelector(state => state.users.isLoggedIn);
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/login' && isLoggedIn === false) {
+      setIsLoginModalOpen(true);
+    }
+  }, []);
 
   return (
     <div style={{ height: '100vh', position: 'relative' }}>
@@ -35,7 +46,9 @@ const Home = () => {
               variant="contained"
               label="BOOK APPOINTMENTI"
               handleSubmit={() => {
-                setIsLoginModalOpen(true);
+                isLoggedIn
+                  ? history.push('/book_appointment')
+                  : setIsLoginModalOpen(true);
               }}
             />
 
