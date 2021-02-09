@@ -38,3 +38,10 @@ export const apiError = type => error => {
     error,
   };
 };
+
+export const getFormattedDate = date => {
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var year = date.getFullYear();
+  return day + '/' + month + '/' + year;
+};

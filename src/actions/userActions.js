@@ -14,7 +14,7 @@ export const login = (code, callback = () => {}) => {
   return dispatch => {
     dispatch(apiDispatch(IS_LOGIN_PENDING, true));
     apiClient
-      .post(url, { code })
+      .post(url, { code: code })
       .then(res => {
         dispatch(apiDispatch(SET_USER_DATA, res.data));
         dispatch(apiDispatch(SET_IS_LOGIN, true));
@@ -30,7 +30,7 @@ export const login = (code, callback = () => {}) => {
           dispatch(apiDispatch(SET_USER_DATA, {}));
           dispatch(apiDispatch(IS_LOGIN_PENDING, false));
           dispatch(apiDispatch(SET_IS_LOGIN, false));
-          dispatch(apiDispatch(USER_API_ERROR, err.response.data));
+          dispatch(apiDispatch(USER_API_ERROR, err.response));
         }
       });
   };

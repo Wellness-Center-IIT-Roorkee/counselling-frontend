@@ -7,6 +7,7 @@ const CounselorCard = ({
   className = '',
   image,
   speciality = [],
+  days = [],
   name = '',
 }) => {
   return (
@@ -20,8 +21,12 @@ const CounselorCard = ({
             <span className="fw-500 text-grey-800">Speciality:</span>
             <span className="text-grey-600">
               {' '}
-              {capitalizeFirstLetter(speciality.join(' '))}
+              {capitalizeFirstLetter(speciality)}
             </span>
+          </div>
+          <div>
+            <span className="fw-500 text-grey-800">Availability:</span>
+            <span className="text-grey-600"> {days.join(', ')}</span>
           </div>
         </CardContent>
         <Row className="justify-content-center align-items-center fw-500 bg-blue-800 text-white h-2_25">

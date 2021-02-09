@@ -5,6 +5,7 @@ import confirmLeft from '../../assets/illustrations/confirmLeft.png';
 import confirmBottom from '../../assets/illustrations/confirmBottom.png';
 
 const ConfirmAppointment = () => {
+  const bookingData = useSelector(state => state.booking.bookingData);
   return (
     <div style={{ height: '100vh', position: 'relative' }}>
       <img src={confirmLeft} className="position-absolute mt-5" />
@@ -23,6 +24,36 @@ const ConfirmAppointment = () => {
               with counselor. Please refer to details below for further
               communication with the counselor.
             </Col>
+          </Row>
+          <Row className="text-blue-800 fw-200 fs-3_125 md-2">
+            <Col>Counsellor</Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l"></Col>
+          </Row>
+          <Row className="text-blue-800 fw-200 fs-3_125 md-2">
+            <Col>Contact Details</Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l"></Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l"></Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l"></Col>
+          </Row>
+          <Row className="text-blue-800 fw-200 fs-3_125 md-2">
+            <Col>Appointment Details</Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l"></Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l"></Col>
+          </Row>
+          <Row className="text-grey-600">
+            <Col className="lh-1_875 fs-l"></Col>
           </Row>
         </Col>
         <Col>
