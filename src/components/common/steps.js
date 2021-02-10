@@ -28,7 +28,7 @@ const Steps = ({
       <Row className="p-4 m-0 mt-4 mx-5">
         <Col>
           <Row className="align-items-center">
-            <span className="text-primary fs-2">{`Step: ${currentStep} `}</span>
+            <span className="text-primary fs-2 mr-1">{`Step: ${currentStep}`}</span>
             <span className="text-primary fs-2 fw-300">{stepLabel}</span>
           </Row>
           <Row className="fs-l text-grey-600">{description}</Row>

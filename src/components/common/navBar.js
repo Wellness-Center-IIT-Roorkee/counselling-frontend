@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Button, AppBar, Toolbar, Avatar } from '@material-ui/core';
-import logo from '../../assets/logos/wellness.jpeg';
+import logo from '../../assets/logos/wellness-logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { logOut } from '../../actions/userActions';
 import { getInitials } from '../../helpers/helperFunctions';
 
@@ -50,9 +51,11 @@ const NavBar = () => {
     <AppBar position="static" color="default" className={classes.AppBar}>
       <Grid item>
         <Toolbar className="justify-content-between">
-          <Button className={classes.mainLogo}>
-            <Avatar src={logo} className={classes.logo} />
-          </Button>
+          <Link to="/">
+            <Button className={classes.mainLogo}>
+              <Avatar src={logo} className={classes.logo} />
+            </Button>
+          </Link>
           <div>
             <Grid container spacing={3} alignItems="center">
               {isLoggedIn && (

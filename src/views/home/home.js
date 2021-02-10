@@ -44,7 +44,7 @@ const Home = () => {
               className="mr-4 ml-3"
               color="secondary"
               variant="contained"
-              label="BOOK APPOINTMENTI"
+              label="BOOK APPOINTMENT"
               handleSubmit={() => {
                 isLoggedIn
                   ? history.push('/book_appointment')

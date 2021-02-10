@@ -2,7 +2,13 @@ import { React, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import { Redirect, useHistory } from 'react-router';
-import { FormHelperText, FormLabel, InputLabel } from '@material-ui/core';
+import {
+  FormHelperText,
+  FormLabel,
+  Icon,
+  InputAdornment,
+  InputLabel,
+} from '@material-ui/core';
 import Select from 'react-select';
 import * as yup from 'yup';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
@@ -45,11 +51,37 @@ export default function BookAppointment() {
     counsellor: {},
   });
 
+  const handleNext = async () => {
+    switch (activeStep) {
+      case 0:
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        break;
+      case 1:
+        const bookingData = {
+          counselling_date: getFormattedDate(booking.date),
+          counsellor: booking.counsellor.id,
+          counselling_slot: booking.slot.id,
+          counselling_medium: booking.counsellingMedium.label,
+        };
+        const result = await validateForm(schema, bookingData);
+        if (!result.isError) {
+          dispatch(confirmBooking(bookingData, handleSuccess));
+        } else {
+          const valErrors = result.valErrors;
+          setValidationErrorList(valErrors);
+        }
+        break;
+      default:
+        return null;
+    }
+  };
+
   const handleCounsellorChange = counsellor => {
     setBooking({
       ...booking,
       counsellor: counsellor,
     });
+    handleNext();
   };
 
   const counsellorList = useSelector(state => state.counsellor.counsellorsData);
@@ -123,31 +155,6 @@ export default function BookAppointment() {
       .catch(err => {});
   };
 
-  const handleNext = async () => {
-    switch (activeStep) {
-      case 0:
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-        break;
-      case 1:
-        const bookingData = {
-          counselling_date: getFormattedDate(booking.date),
-          counsellor: booking.counsellor.id,
-          counselling_slot: booking.slot.id,
-          counselling_medium: booking.counsellingMedium.label,
-        };
-        const result = await validateForm(schema, bookingData);
-        if (!result.isError) {
-          dispatch(confirmBooking(bookingData, handleSuccess));
-        } else {
-          const valErrors = result.valErrors;
-          setValidationErrorList(valErrors);
-        }
-        break;
-      default:
-        return null;
-    }
-  };
-
   const handleSuccess = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
@@ -171,7 +178,7 @@ export default function BookAppointment() {
               onBack={handleBack}
               description="Please choose the counsellor you want to book your appointment with"
             />
-            <Row className="justify-content-md-center" onClick={handleNext}>
+            <Row className="justify-content-md-center">
               {counsellorListCards}
             </Row>
           </div>
