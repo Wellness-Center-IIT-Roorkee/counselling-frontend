@@ -46,3 +46,11 @@
 .t-50p {
   top: 50%;
 }
+
+.f-right {
+  float: right;
+}
+
+.f-left {
+  float: left;
+}

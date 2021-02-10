@@ -45,3 +45,6 @@ export const getFormattedDate = date => {
   var year = date.getFullYear();
   return day + '/' + month + '/' + year;
 };
+
+export const getInitials = name =>
+  name.split(' ').map(str => (str ? str[0].toUpperCase() : ''));

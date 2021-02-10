@@ -36,7 +36,6 @@ export default function BookAppointment() {
   });
 
   const handleCounsellorChange = counsellor => {
-    console.log('changing counsellor');
     setBooking({
       ...booking,
       counsellor: counsellor,
@@ -75,7 +74,6 @@ export default function BookAppointment() {
       ...booking,
       counsellingMedium: counsellingMedium.find(x => x.key === e.target.value),
     });
-    console.log(booking);
   };
 
   const handleSlotChange = e => {
@@ -101,9 +99,7 @@ export default function BookAppointment() {
       .then(res => {
         setSlotOptions([...res.data]);
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => {});
   };
 
   const handleNext = () => {
@@ -154,7 +150,6 @@ export default function BookAppointment() {
           </div>
         );
       case 1:
-        console.log(booking);
         return (
           <div className="justify-content-center m-0 mx-10p">
             <Steps
