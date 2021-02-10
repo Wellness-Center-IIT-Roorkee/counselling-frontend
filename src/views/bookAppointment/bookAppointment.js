@@ -2,8 +2,9 @@ import { React, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import { Redirect, useHistory } from 'react-router';
-import axios from 'axios';
-import { FormLabel, InputLabel, Select, TextField } from '@material-ui/core';
+import { FormHelperText, FormLabel, InputLabel } from '@material-ui/core';
+import Select from 'react-select';
+import * as yup from 'yup';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { getCounsellorList } from '../../actions/counsellorActions';
@@ -16,11 +17,20 @@ import apiClient from '../../helpers/apiClient';
 import { BOOKING_APIS } from '../../urls';
 import { getFormattedDate } from '../../helpers/helperFunctions';
 import { confirmBooking } from '../../actions/bookingActions';
+import validateForm from '../../helpers/validateForm';
+
+const schema = yup.object().shape({
+  counselling_date: yup.string().required(),
+  counsellor: yup.string().required(),
+  counselling_slot: yup.string().required(),
+  counselling_medium: yup.string().required(),
+});
 
 export default function BookAppointment() {
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [validationErrorList, setValidationErrorList] = useState([]);
 
   useEffect(() => {
     dispatch(getCounsellorList());
@@ -30,7 +40,7 @@ export default function BookAppointment() {
 
   const [booking, setBooking] = useState({
     counsellingMedium: {},
-    slot: { id: '0', slot: 'none' },
+    slot: {},
     date: new Date(),
     counsellor: {},
   });
@@ -47,7 +57,10 @@ export default function BookAppointment() {
     counsellorList &&
     counsellorList.map(counsellor => {
       return (
-        <div onClick={() => handleCounsellorChange(counsellor)}>
+        <div
+          key={counsellor.id}
+          onClick={() => handleCounsellorChange(counsellor)}
+        >
           <CounselorCard
             key={counsellor.id}
             name={counsellor.user.name}
@@ -67,19 +80,27 @@ export default function BookAppointment() {
       date.getTime() - todayDate.getTime() > 604800000 ||
       !booking.counsellor.days_available.includes(weekdays[date.getDay()])
     );
-    // return date.getDay() === 0 || date.getDay() === 6;
   }
-  const handleMediumChange = e => {
+
+  const handleOnBlur = key => event => {
+    event.preventDefault();
+    const newValidationErrorList = validationErrorList.filter(
+      s => s.path !== key
+    );
+    setValidationErrorList(newValidationErrorList);
+  };
+
+  const handleMediumChange = (e, f) => {
     setBooking({
       ...booking,
-      counsellingMedium: counsellingMedium.find(x => x.key === e.target.value),
+      counsellingMedium: counsellingMedium.find(x => x.value === e.value),
     });
   };
 
   const handleSlotChange = e => {
     setBooking({
       ...booking,
-      slot: slotOptions.find(x => x.id == e.target.value),
+      slot: slotOptions.find(x => x.id === e.id),
     });
   };
 
@@ -102,7 +123,7 @@ export default function BookAppointment() {
       .catch(err => {});
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     switch (activeStep) {
       case 0:
         setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -112,9 +133,15 @@ export default function BookAppointment() {
           counselling_date: getFormattedDate(booking.date),
           counsellor: booking.counsellor.id,
           counselling_slot: booking.slot.id,
-          counselling_medium: booking.counsellingMedium.text,
+          counselling_medium: booking.counsellingMedium.label,
         };
-        dispatch(confirmBooking(bookingData, handleSuccess));
+        const result = await validateForm(schema, bookingData);
+        if (!result.isError) {
+          dispatch(confirmBooking(bookingData, handleSuccess));
+        } else {
+          const valErrors = result.valErrors;
+          setValidationErrorList(valErrors);
+        }
         break;
       default:
         return null;
@@ -167,22 +194,25 @@ export default function BookAppointment() {
                 <FormLabel>Medium of Counselling</FormLabel>
                 <InputLabel htmlFor="medium-of-counselling"></InputLabel>
                 <Select
-                  native
-                  variant="outlined"
-                  name="counsellingMedium"
-                  value={booking.counsellingMedium.key}
+                  value={counsellingMedium.find(
+                    medium => medium.value === booking.counsellingMedium.value
+                  )}
                   onChange={handleMediumChange}
-                  style={{ width: '100%' }}
-                  inputProps={{
-                    name: 'counsellingMedium',
-                    id: 'medium-of-counselling',
-                  }}
-                >
-                  <option aria-label="None" value="0" />
-                  {counsellingMedium.map(medium => {
-                    return <option value={medium.key}>{medium.text}</option>;
-                  })}
-                </Select>
+                  options={counsellingMedium}
+                  onFocus={handleOnBlur('counselling_medium')}
+                  onBlur={handleOnBlur('counselling_medium')}
+                />
+                {validationErrorList.some(
+                  err => err.path === 'counselling_medium'
+                ) ? (
+                  <FormHelperText error={true}>
+                    {
+                      validationErrorList.find(
+                        err => err.path == 'counselling_medium'
+                      ).message
+                    }
+                  </FormHelperText>
+                ) : null}
               </div>
               <div className="mt-4">
                 <FormLabel required>Choose Date</FormLabel>
@@ -194,7 +224,6 @@ export default function BookAppointment() {
                       name="deadline"
                       onChange={handleDateChange}
                       value={booking.date}
-                      // type='date'
                       shouldDisableDate={disabledDates}
                     />
                   </MuiPickersUtilsProvider>
@@ -204,22 +233,32 @@ export default function BookAppointment() {
                 <FormLabel>Choose Slot</FormLabel>
                 <InputLabel htmlFor="choose-slot"></InputLabel>
                 <Select
-                  native
-                  variant="outlined"
-                  name="slot"
-                  value={booking.slot.id}
+                  value={slotOptions.find(
+                    option => option.id === booking.slot.id
+                  )}
                   onChange={handleSlotChange}
                   style={{ width: '100%' }}
                   inputProps={{
                     name: 'slot',
                     id: 'choose-slot',
                   }}
-                >
-                  <option aria-label="None" value="" />
-                  {slotOptions.map(slot => {
-                    return <option value={slot.id}>{slot.slot}</option>;
-                  })}
-                </Select>
+                  options={slotOptions}
+                  getOptionLabel={option => option.slot}
+                  getOptionValue={option => option.id}
+                  onFocus={handleOnBlur('counselling_slot')}
+                  onBlur={handleOnBlur('counselling_slot')}
+                />
+                {validationErrorList.some(
+                  err => err.path === 'counselling_slot'
+                ) ? (
+                  <FormHelperText error={true}>
+                    {
+                      validationErrorList.find(
+                        err => err.path == 'counselling_slot'
+                      ).message
+                    }
+                  </FormHelperText>
+                ) : null}
               </div>
               <CustomButton
                 className="mt-4"

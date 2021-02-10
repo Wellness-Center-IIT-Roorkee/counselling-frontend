@@ -6,6 +6,7 @@ import {
   SET_BOOKING,
   BOOKING_API_ERROR,
 } from './bookingActionTypes';
+import { toastErrorMessage, toastSuccessMessage } from './toastActions';
 
 export const confirmBooking = (data, callback) => {
   const url = BOOKING_APIS.booking;
@@ -16,12 +17,16 @@ export const confirmBooking = (data, callback) => {
       .then(res => {
         dispatch(apiDispatch(SET_BOOKING, res.data));
         dispatch(apiDispatch(CREATE_BOOKING_PENDING, false));
+        dispatch(toastSuccessMessage('appointment created'));
         callback();
       })
       .catch(err => {
         dispatch(apiDispatch(SET_BOOKING, {}));
         dispatch(apiDispatch(BOOKING_API_ERROR, err.response));
         dispatch(apiDispatch(CREATE_BOOKING_PENDING, false));
+        dispatch(
+          toastErrorMessage('Some Error occured in Creating Appointment')
+        );
       });
   };
 };
