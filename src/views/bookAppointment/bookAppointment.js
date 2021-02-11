@@ -182,7 +182,7 @@ export default function BookAppointment() {
         );
       case 1:
         return (
-          <div className="justify-content-center m-0 mx-10p">
+          <Container>
             <Steps
               steps={2}
               currentStep={2}
@@ -193,7 +193,7 @@ export default function BookAppointment() {
                 booking.counsellor.user.name
               }
             />
-            <div className="p-4 m-0 mt-4 mx-5">
+            <div className="p-4 m-0 mt-4">
               <div>
                 <FormLabel>Medium of Counselling</FormLabel>
                 <InputLabel htmlFor="medium-of-counselling"></InputLabel>
@@ -272,7 +272,7 @@ export default function BookAppointment() {
                 handleSubmit={handleNext}
               />
             </div>
-          </div>
+          </Container>
         );
       case 2:
         return <Redirect to="confirm" />;

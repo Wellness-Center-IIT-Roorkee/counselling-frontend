@@ -25,7 +25,6 @@ const DefaultLayout = ({ children }) => {
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
-          rtl={false}
           pauseOnFocusLoss
           draggable
           pauseOnHover
