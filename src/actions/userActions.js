@@ -1,6 +1,6 @@
 import apiClient from '../helpers/apiClient';
 import { apiDispatch, deleteCookie } from '../helpers/helperFunctions';
-import { USER_APIS } from '../urls';
+import { BOOKING_APIS, USER_APIS } from '../urls';
 import {
   IS_LOGIN_PENDING,
   SET_USER_DATA,
@@ -9,6 +9,11 @@ import {
   LOGGING_OUT_PENDING,
   USER_API_ERROR,
 } from './userActionTypes';
+import {
+  GET_BOOKING_PENDING,
+  SET_BOOKING,
+  BOOKING_API_ERROR,
+} from './bookingActionTypes';
 
 export const login = (code, callback = () => {}) => {
   const url = USER_APIS.login;
@@ -33,6 +38,24 @@ export const login = (code, callback = () => {}) => {
           dispatch(apiDispatch(SET_IS_LOGIN, false));
           dispatch(apiDispatch(USER_API_ERROR, err.response));
         }
+      });
+  };
+};
+
+export const getBookingData = () => {
+  const url = BOOKING_APIS.booking;
+  return dispatch => {
+    dispatch(apiDispatch(GET_BOOKING_PENDING, true));
+    apiClient
+      .get(url)
+      .then(res => {
+        dispatch(apiDispatch(SET_BOOKING, res.data[0]));
+        dispatch(apiDispatch(GET_BOOKING_PENDING, false));
+      })
+      .catch(err => {
+        dispatch(apiDispatch(SET_BOOKING, null));
+        dispatch(apiDispatch(BOOKING_API_ERROR, err.response));
+        dispatch(apiDispatch(GET_BOOKING_PENDING, false));
       });
   };
 };
@@ -64,9 +87,10 @@ export const logOut = () => {
     apiClient
       .post(url)
       .then(res => {
-        dispatch(apiDispatch(SET_USER_DATA, {}));
         dispatch(apiDispatch(SET_IS_LOGIN, false));
+        dispatch(apiDispatch(SET_USER_DATA, {}));
         dispatch(apiDispatch(LOGGING_OUT_PENDING, false));
+        dispatch(apiDispatch(SET_BOOKING, null));
       })
       .catch(err => {
         dispatch(apiDispatch(USER_API_ERROR, err.response));

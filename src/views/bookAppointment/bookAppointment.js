@@ -2,13 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import { Redirect, useHistory } from 'react-router';
-import {
-  FormHelperText,
-  FormLabel,
-  Icon,
-  InputAdornment,
-  InputLabel,
-} from '@material-ui/core';
+import { FormHelperText, FormLabel, InputLabel } from '@material-ui/core';
 import Select from 'react-select';
 import * as yup from 'yup';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
@@ -24,6 +18,7 @@ import { BOOKING_APIS } from '../../urls';
 import { getFormattedDate } from '../../helpers/helperFunctions';
 import { confirmBooking } from '../../actions/bookingActions';
 import validateForm from '../../helpers/validateForm';
+import { toastErrorMessage } from '../../actions/toastActions';
 
 const schema = yup.object().shape({
   counselling_date: yup.string().required(),
@@ -36,6 +31,13 @@ export default function BookAppointment() {
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
+  const bookingData = useSelector(state => state.booking.bookingData);
+  useEffect(() => {
+    if (bookingData) {
+      dispatch(toastErrorMessage('You already have a pending booking'));
+      history.push('/');
+    }
+  }, []);
   const [validationErrorList, setValidationErrorList] = useState([]);
 
   useEffect(() => {

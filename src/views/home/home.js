@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
+import { toastErrorMessage } from '../../actions/toastActions';
 import illustration from '../../assets/illustrations/Group 6.svg';
+import BookingCard from '../../components/booking/bookingCard';
 import CustomButton from '../../components/common/button';
 import LoginModal from '../../components/home/loginModal';
 
 const Home = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const isLoggedIn = useSelector(state => state.users.isLoggedIn);
+  const bookingData = useSelector(state => state.booking.bookingData);
   const history = useHistory();
   const location = useLocation();
 
@@ -39,7 +42,7 @@ const Home = () => {
               share any problem.
             </Col>
           </Row>
-          <Row className="mt-4 ">
+          <Row className="mt-4 md-2">
             <CustomButton
               className="mr-4 ml-3"
               color="secondary"
@@ -58,6 +61,25 @@ const Home = () => {
               variant="outlined"
               label="Know the counselors"
             />
+          </Row>
+          {bookingData ? (
+            <Row className="text-blue-800 fw-500 fs-2_500 md-2 align-items-center">
+              <Col>Your Booking:</Col>
+            </Row>
+          ) : (
+            ''
+          )}
+          <Row>
+            {bookingData ? (
+              <BookingCard
+                image={bookingData.counsellor.user.display_picture}
+                name={bookingData.counsellor.user.name}
+                date={bookingData.counselling_date}
+                time={bookingData.counselling_slot.slot}
+              />
+            ) : (
+              ''
+            )}
           </Row>
         </Col>
         <Col>

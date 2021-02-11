@@ -35,7 +35,7 @@ export default function ConfirmAppointment() {
                 communication with the counselor.
               </Col>
             </Row>
-            <Row className="text-blue-800 fw-800 fs-2_500">
+            <Row className="text-blue-800 fw-800 fs-1_500">
               <Col>Counsellor</Col>
             </Row>
             <Row className="text-grey-600">
@@ -48,7 +48,7 @@ export default function ConfirmAppointment() {
                 Webex Link : {bookingData.counsellor.webex_link}
               </Col>
             </Row>
-            <Row className="text-blue-800 fw-800 fs-2_500">
+            <Row className="text-blue-800 fw-800 fs-1_500">
               <Col>Contact Details</Col>
             </Row>
             <Row className="text-grey-600">
@@ -64,7 +64,7 @@ export default function ConfirmAppointment() {
             {/* <Row className="text-grey-600">
             <Col className="lh-1_875 fs-l"></Col>
           </Row> */}
-            <Row className="text-blue-800 fw-800 fs-2_500">
+            <Row className="text-blue-800 fw-800 fs-1_500">
               <Col>Appointment Details</Col>
             </Row>
             <Row className="text-grey-600">
