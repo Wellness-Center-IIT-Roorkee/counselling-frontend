@@ -1,7 +1,7 @@
 import { useMediaQuery } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { toastErrorMessage } from '../../actions/toastActions';
 import illustration from '../../assets/illustrations/Group 6.svg';
@@ -15,6 +15,7 @@ const Home = () => {
   const bookingData = useSelector(state => state.booking.bookingData);
   const history = useHistory();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const smbreakpoint = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
@@ -23,7 +24,6 @@ const Home = () => {
       setIsLoginModalOpen(true);
     }
   }, []);
-
   return (
     <Container>
       <Row className="align-items-center my-auto mt-5 ">
@@ -53,7 +53,13 @@ const Home = () => {
                 label="BOOK APPOINTMENT"
                 handleSubmit={() => {
                   isLoggedIn
-                    ? history.push('/book_appointment')
+                    ? Object.keys(bookingData).length > 0
+                      ? dispatch(
+                          toastErrorMessage(
+                            'You already have a pending booking'
+                          )
+                        )
+                      : history.push('/book_appointment')
                     : setIsLoginModalOpen(true);
                 }}
               />
@@ -66,15 +72,15 @@ const Home = () => {
               />
             </Col>
           </Row>
-          {bookingData ? (
+          {Object.keys(bookingData).length > 0 ? (
             <Row className="text-blue-800 fw-500 fs-2_500 md-2 align-items-center">
               <Col>Your Booking:</Col>
             </Row>
           ) : (
             ''
           )}
-          <Row>
-            {bookingData ? (
+          <Row className="justify-content-center mb-5">
+            {Object.keys(bookingData).length > 0 ? (
               <BookingCard
                 image={bookingData.counsellor.user.display_picture}
                 name={bookingData.counsellor.user.name}

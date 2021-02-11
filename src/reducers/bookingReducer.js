@@ -8,7 +8,7 @@ import {
 const initialState = {
   createBookingPending: false,
   getBookingPending: false,
-  bookingData: null,
+  bookingData: {},
   error: {},
 };
 

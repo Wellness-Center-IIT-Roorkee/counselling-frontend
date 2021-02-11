@@ -24,7 +24,7 @@ const styles = makeStyles(theme => ({
     borderRadius: 0,
   },
   avatar: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
     color: theme.palette.common.white,
   },
 
@@ -36,7 +36,7 @@ const styles = makeStyles(theme => ({
 
     '&:hover': {
       background: theme.palette.secondary.hover,
-      boxShadow: '0px 2px 10px #888888',
+      boxShadow: '0px 2px 10px #888',
     },
   },
 }));

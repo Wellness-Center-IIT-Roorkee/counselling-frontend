@@ -1,6 +1,11 @@
 import { Row } from 'react-bootstrap';
 import React from 'react';
-import { Card, CardActionArea, CardContent } from '@material-ui/core';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  useMediaQuery,
+} from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../helpers/helperFunctions';
 import { useHistory } from 'react-router';
 
@@ -12,12 +17,16 @@ const BookingCard = ({
   name = '',
 }) => {
   const history = useHistory();
+  const smbreakpoint = useMediaQuery(theme => theme.breakpoints.up('sm'));
+
   return (
     <Card className={` ${className}`} onClick={() => history.push('/confirm')}>
       <CardActionArea onClick={() => {}} style={{ display: 'flex' }}>
-        <div className="p-4">
-          <img className="w-10 h-10" src={image} />
-        </div>
+        {smbreakpoint && (
+          <div className="p-4">
+            <img className="w-10 h-10" src={image} />
+          </div>
+        )}
         <CardContent>
           <div>
             <span className="fw-500 text-grey-800">Name:</span>

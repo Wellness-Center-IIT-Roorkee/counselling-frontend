@@ -32,12 +32,17 @@ export default function BookAppointment() {
   const dispatch = useDispatch();
   const history = useHistory();
   const bookingData = useSelector(state => state.booking.bookingData);
+  const [curr, setCurr] = useState(Date.now());
+
   useEffect(() => {
-    if (bookingData) {
-      dispatch(toastErrorMessage('You already have a pending booking'));
+    if (Object.keys(bookingData).length > 0) {
       history.push('/');
+      setTimeout(() => {
+        dispatch(toastErrorMessage('You already have a pending booking'));
+      }, 0);
     }
-  }, []);
+  }, [bookingData]);
+
   const [validationErrorList, setValidationErrorList] = useState([]);
 
   useEffect(() => {

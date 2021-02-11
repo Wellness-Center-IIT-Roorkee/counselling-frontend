@@ -46,5 +46,5 @@ export const getFormattedDate = date => {
   return day + '/' + month + '/' + year;
 };
 
-export const getInitials = name =>
+export const getInitials = (name = '') =>
   name.split(' ').map(str => (str ? str[0].toUpperCase() : ''));
