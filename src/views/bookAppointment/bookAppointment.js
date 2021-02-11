@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { Redirect, useHistory } from 'react-router';
 import { FormHelperText, FormLabel, InputLabel } from '@material-ui/core';
 import Select from 'react-select';
@@ -91,19 +91,14 @@ export default function BookAppointment() {
     counsellorList &&
     counsellorList.map(counsellor => {
       return (
-        <div
+        <CounselorCard
           key={counsellor.id}
+          name={counsellor.user.name}
+          speciality={counsellor.speciality}
+          image={counsellor.user.display_picture}
+          days={counsellor.days_available}
           onClick={() => handleCounsellorChange(counsellor)}
-        >
-          <CounselorCard
-            key={counsellor.id}
-            name={counsellor.user.name}
-            speciality={counsellor.speciality}
-            image={counsellor.user.display_picture}
-            days={counsellor.days_available}
-            className="mr-5"
-          />
-        </div>
+        />
       );
     });
 
@@ -172,7 +167,7 @@ export default function BookAppointment() {
     switch (step) {
       case 0:
         return (
-          <div className="justify-content-center m-0 mx-10p">
+          <Container>
             <Steps
               steps={2}
               currentStep={1}
@@ -180,10 +175,10 @@ export default function BookAppointment() {
               onBack={handleBack}
               description="Please choose the counsellor you want to book your appointment with"
             />
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-center" style={{ gap: '1rem' }}>
               {counsellorListCards}
             </Row>
-          </div>
+          </Container>
         );
       case 1:
         return (

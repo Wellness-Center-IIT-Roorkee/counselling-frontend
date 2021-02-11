@@ -1,5 +1,6 @@
+import { useMediaQuery } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { toastErrorMessage } from '../../actions/toastActions';
@@ -15,6 +16,8 @@ const Home = () => {
   const history = useHistory();
   const location = useLocation();
 
+  const smbreakpoint = useMediaQuery(theme => theme.breakpoints.up('sm'));
+
   useEffect(() => {
     if (location.pathname === '/login' && isLoggedIn === false) {
       setIsLoginModalOpen(true);
@@ -22,9 +25,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ height: '100vh', position: 'relative' }}>
-      <Row className="align-items-center my-auto h-100 mx-5">
-        <Col className="pr-5">
+    <Container>
+      <Row className="align-items-center my-auto mt-5 ">
+        <Col>
           <Row className="text-blue-800 fw-500 fs-3_125 md-2">
             <Col>Appointment Booking Portal</Col>
           </Row>
@@ -43,24 +46,25 @@ const Home = () => {
             </Col>
           </Row>
           <Row className="mt-4 md-2">
-            <CustomButton
-              className="mr-4 ml-3"
-              color="secondary"
-              variant="contained"
-              label="BOOK APPOINTMENT"
-              handleSubmit={() => {
-                isLoggedIn
-                  ? history.push('/book_appointment')
-                  : setIsLoginModalOpen(true);
-              }}
-            />
-
-            <CustomButton
-              className="ml-5"
-              color="secondary"
-              variant="outlined"
-              label="Know the counselors"
-            />
+            <Col>
+              <CustomButton
+                color="secondary"
+                variant="contained"
+                label="BOOK APPOINTMENT"
+                handleSubmit={() => {
+                  isLoggedIn
+                    ? history.push('/book_appointment')
+                    : setIsLoginModalOpen(true);
+                }}
+              />
+            </Col>
+            <Col>
+              <CustomButton
+                color="secondary"
+                variant="outlined"
+                label="Know the counselors"
+              />
+            </Col>
           </Row>
           {bookingData ? (
             <Row className="text-blue-800 fw-500 fs-2_500 md-2 align-items-center">
@@ -82,15 +86,17 @@ const Home = () => {
             )}
           </Row>
         </Col>
-        <Col>
-          <img src={illustration} width="100%" />
-        </Col>
+        {smbreakpoint && (
+          <Col>
+            <img src={illustration} width="100%" />
+          </Col>
+        )}
+        <LoginModal
+          open={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
       </Row>
-      <LoginModal
-        open={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
-    </div>
+    </Container>
   );
 };
 

@@ -16,7 +16,7 @@ export default function ConfirmAppointment() {
     }
   }, []);
   return (
-    <div style={{ height: '100vh', position: 'relative' }}>
+    <div>
       <img src={confirmLeft} className="position-absolute mt-5" />
       <img
         src={confirmBottom}

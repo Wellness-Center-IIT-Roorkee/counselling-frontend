@@ -35,6 +35,10 @@
   width: 30rem;
 }
 
+.w-10p {
+  width: 10%;
+}
+
 .h-2 {
   height: 2rem;
 }
@@ -51,6 +55,10 @@
   height: 2.25rem;
 }
 
+.h-10vw {
+  height: 10vw;
+}
+
 .r-0 {
   right: 0;
 }
@@ -59,10 +67,18 @@
   top: 50%;
 }
 
+.t-40p {
+  top: 40%;
+}
+
 .f-right {
   float: right;
 }
 
 .f-left {
   float: left;
+}
+
+.fg-100 {
+  flex-grow: 100;
 }

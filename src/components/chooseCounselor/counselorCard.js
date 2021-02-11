@@ -9,10 +9,11 @@ const CounselorCard = ({
   speciality = [],
   days = [],
   name = '',
+  onClick,
 }) => {
   return (
-    <Card className={`w-300 ${className}`}>
-      <CardActionArea onClick={() => {}}>
+    <Card className={`w-300 ${className}`} onClick={onClick}>
+      <CardActionArea>
         <div className="p-4">
           <img className="w-100 h-100" src={image} />
         </div>

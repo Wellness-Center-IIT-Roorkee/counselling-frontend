@@ -6,10 +6,19 @@ import 'react-toastify/dist/ReactToastify.css';
 const DefaultLayout = ({ children }) => {
   return (
     <div>
-      <main style={{ height: '100vh', overflow: 'hidden' }}>
+      <main
+        style={{
+          height: '100vh',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         {' '}
         <NavBar />
-        {children}
+        <div className="w-100 fg-100 overflow-auto position-relative">
+          {children}
+        </div>
         <ToastContainer
           position="bottom-center"
           autoClose={3000}
