@@ -248,8 +248,8 @@ const CustomButton = ({
 
   const customClass = variant + color.charAt(0).toUpperCase() + color.slice(1);
   const buttonLabel = label || 'Save';
-  const lgBreakpoint = useMediaQuery(theme => theme.breakpoints.up('md'));
-  buttonSize = lgBreakpoint ? buttonSize : 'medium';
+  const lgBreakpoint = useMediaQuery(theme => theme.breakpoints.up('sm'));
+  buttonSize = lgBreakpoint ? buttonSize : 'small';
 
   let buttonSizeCSS = '';
   switch (buttonSize) {

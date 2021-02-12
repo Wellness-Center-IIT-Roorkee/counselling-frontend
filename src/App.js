@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import { publicRoutes, protectedRoutes } from './routes';
 import { useDispatch } from 'react-redux';
 import { getInfo } from './actions/userActions';
 import PublicRoute from './publicRoute';
+import { getBookingData } from './actions/bookingActions';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getInfo());
+    dispatch(getBookingData());
   }, []);
   const isAuth = true;
   return (

@@ -38,3 +38,13 @@ export const apiError = type => error => {
     error,
   };
 };
+
+export const getFormattedDate = date => {
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var year = date.getFullYear();
+  return day + '/' + month + '/' + year;
+};
+
+export const getInitials = (name = '') =>
+  name.split(' ').map(str => (str ? str[0].toUpperCase() : ''));

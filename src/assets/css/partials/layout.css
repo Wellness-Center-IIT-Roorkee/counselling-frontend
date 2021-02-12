@@ -31,12 +31,32 @@
   width: 300px;
 }
 
+.w-30 {
+  width: 30rem;
+}
+
+.w-10p {
+  width: 10%;
+}
+
 .h-2 {
   height: 2rem;
 }
 
+.h-12 {
+  height: 12rem;
+}
+
+.h-10 {
+  height: 10rem;
+}
+
 .h-2_25 {
   height: 2.25rem;
+}
+
+.h-10vw {
+  height: 10vw;
 }
 
 .r-0 {
@@ -45,4 +65,20 @@
 
 .t-50p {
   top: 50%;
+}
+
+.t-40p {
+  top: 40%;
+}
+
+.f-right {
+  float: right;
+}
+
+.f-left {
+  float: left;
+}
+
+.fg-100 {
+  flex-grow: 100;
 }

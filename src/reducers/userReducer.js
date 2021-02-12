@@ -2,6 +2,7 @@ import {
   GET_USER_DATA_PENDING,
   IS_LOGIN_PENDING,
   SET_IS_LOGIN,
+  LOGGING_OUT_PENDING,
   SET_USER_DATA,
   USER_API_ERROR,
 } from '../actions/userActionTypes';
@@ -9,6 +10,7 @@ import {
 const initialState = {
   isLoginPending: false,
   getUserDataPending: false,
+  loggingOutPending: false,
   userData: {},
   isLoggedIn: false,
   error: {},
@@ -19,6 +21,8 @@ const userReducer = (state = initialState, action) => {
   switch (type) {
     case SET_IS_LOGIN:
       return { ...state, isLoggedIn: payload };
+    case LOGGING_OUT_PENDING:
+      return { ...state, loggingOutPending: payload };
     case SET_USER_DATA:
       return { ...state, userData: payload };
     case USER_API_ERROR:

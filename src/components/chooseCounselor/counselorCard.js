@@ -7,11 +7,13 @@ const CounselorCard = ({
   className = '',
   image,
   speciality = [],
+  days = [],
   name = '',
+  onClick,
 }) => {
   return (
-    <Card className={`w-300 ${className}`}>
-      <CardActionArea onClick={() => {}}>
+    <Card className={`w-300 ${className}`} onClick={onClick}>
+      <CardActionArea>
         <div className="p-4">
           <img className="w-100 h-100" src={image} />
         </div>
@@ -20,8 +22,12 @@ const CounselorCard = ({
             <span className="fw-500 text-grey-800">Speciality:</span>
             <span className="text-grey-600">
               {' '}
-              {capitalizeFirstLetter(speciality.join(' '))}
+              {capitalizeFirstLetter(speciality)}
             </span>
+          </div>
+          <div>
+            <span className="fw-500 text-grey-800">Availability:</span>
+            <span className="text-grey-600"> {days.join(', ')}</span>
           </div>
         </CardContent>
         <Row className="justify-content-center align-items-center fw-500 bg-blue-800 text-white h-2_25">

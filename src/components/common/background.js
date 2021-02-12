@@ -1,6 +1,7 @@
 import confirmLeft from '../../assets/illustrations/confirmLeft.png';
 import confirmBottom from '../../assets/illustrations/confirmBottom.png';
 import confirmRight from '../../assets/illustrations/confirmRight.png';
+import { useMediaQuery } from '@material-ui/core';
 
 const BoxBackground = ({
   className = '',
@@ -10,17 +11,23 @@ const BoxBackground = ({
   children,
   ...rest
 }) => {
+  const matches = useMediaQuery(theme => theme.breakpoints.up('sm'));
   return (
-    <div className={`position-absolute w-100 h-100 ${className}`} {...rest}>
-      {left && <img src={confirmLeft} className="position-absolute mt-6" />}
-      {bottom && (
+    <div
+      className={` w-100 h-100 overflow-scroll position-absolute  ${className}`}
+      {...rest}
+    >
+      {left && matches && (
+        <img src={confirmLeft} className="position-absolute w-10p mt-6" />
+      )}
+      {bottom && matches && (
         <img
           src={confirmBottom}
-          className="position-absolute fixed-bottom mx-5"
+          className="position-absolute h-10vw fixed-bottom mx-5"
         />
       )}
-      {right && (
-        <img src={confirmRight} className="position-absolute r-0 t-50p" />
+      {right && matches && (
+        <img src={confirmRight} className="position-absolute w-10p r-0 t-40p" />
       )}
       <div>{children}</div>
     </div>

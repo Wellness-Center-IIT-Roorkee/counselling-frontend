@@ -54,9 +54,9 @@ export const theme = createMuiTheme({
       disabled: variables.green500,
     },
     grey: {
-      500: variables.blueGrey600,
-      700: variables.blue200,
-      800: variables.blueGrey700,
+      600: variables.blueGrey600,
+      200: variables.blue200,
+      700: variables.blueGrey700,
     },
   },
   breakpoints: {
@@ -110,9 +110,11 @@ export const iconButtonUseStyles = makeStyles({
     borderRadius: '2px !important',
     padding: '0.25rem !important',
   },
+
   colorPrimary: {
     background: `${variables.grey600A05} !important`,
   },
+
   colorSecondary: {
     color: `transparent !important`,
   },
