@@ -273,7 +273,7 @@ export default function BookAppointment() {
                 className="mt-4"
                 color="secondary"
                 variant="contained"
-                label="CONFIRM APPOINTMENTI"
+                label="CONFIRM APPOINTMENT"
                 handleSubmit={handleNext}
               />
             </div>

@@ -69,6 +69,7 @@ const Home = () => {
                 color="secondary"
                 variant="outlined"
                 label="Know the counselors"
+	        onClick={() => window.open("https://wellness.iitr.ac.in/contact-2/")}
               />
             </Col>
           </Row>
