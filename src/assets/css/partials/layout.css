@@ -82,3 +82,7 @@
 .fg-100 {
   flex-grow: 100;
 }
+
+.flex-direction-column {
+  flex-direction: column;
+}

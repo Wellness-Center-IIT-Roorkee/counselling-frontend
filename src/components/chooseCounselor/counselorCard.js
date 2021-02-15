@@ -13,7 +13,7 @@ const CounselorCard = ({
 }) => {
   return (
     <Card className={`w-300 ${className}`} onClick={onClick}>
-      <CardActionArea>
+      <CardActionArea className="d-flex justify-content-between align-items-stretch flex-direction-column h-100">
         <div className="p-4">
           <img className="w-100 h-100" src={image} />
         </div>
