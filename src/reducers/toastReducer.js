@@ -4,6 +4,7 @@ import {
   TOAST_SUCCESS,
   TOAST_INFO,
   TOAST_ERROR,
+  TOAST_WARNING,
 } from '../actions/toastActionTypes';
 
 const config = {
@@ -31,6 +32,8 @@ export default function toastReducer(
     case TOAST_INFO:
       toast.info(payload, config);
       return state;
+    case TOAST_WARNING:
+      toast.warn(payload, config);
     default:
       return state;
   }

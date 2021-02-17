@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import { toastErrorMessage } from '../../actions/toastActions';
+import { toastWarningMessage } from '../../actions/toastActions';
 import illustration from '../../assets/illustrations/Group 6.svg';
 import BookingCard from '../../components/booking/bookingCard';
 import CustomButton from '../../components/common/button';
@@ -55,7 +55,7 @@ const Home = () => {
                   isLoggedIn
                     ? Object.keys(bookingData).length > 0
                       ? dispatch(
-                          toastErrorMessage(
+                          toastWarningMessage(
                             'You already have a pending booking'
                           )
                         )
@@ -69,7 +69,9 @@ const Home = () => {
                 color="secondary"
                 variant="outlined"
                 label="Know the counselors"
-	        onClick={() => window.open("https://wellness.iitr.ac.in/contact-2/")}
+                onClick={() =>
+                  window.open('https://wellness.iitr.ac.in/contact-2/')
+                }
               />
             </Col>
           </Row>

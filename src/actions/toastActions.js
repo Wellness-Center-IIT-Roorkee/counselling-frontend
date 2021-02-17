@@ -1,4 +1,9 @@
-import { TOAST_SUCCESS, TOAST_ERROR, TOAST_INFO } from './toastActionTypes';
+import {
+  TOAST_SUCCESS,
+  TOAST_ERROR,
+  TOAST_INFO,
+  TOAST_WARNING,
+} from './toastActionTypes';
 
 export const toastSuccessMessage = message => {
   return {
@@ -17,6 +22,12 @@ export const toastErrorMessage = message => {
 export const toastInfoMessage = message => {
   return {
     type: TOAST_INFO,
+    payload: message,
+  };
+};
+export const toastWarningMessage = message => {
+  return {
+    type: TOAST_WARNING,
     payload: message,
   };
 };

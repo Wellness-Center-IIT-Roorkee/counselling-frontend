@@ -18,13 +18,17 @@ import { BOOKING_APIS } from '../../urls';
 import { getFormattedDate } from '../../helpers/helperFunctions';
 import { confirmBooking } from '../../actions/bookingActions';
 import validateForm from '../../helpers/validateForm';
-import { toastErrorMessage } from '../../actions/toastActions';
+import { toastWarningMessage } from '../../actions/toastActions';
 
 const schema = yup.object().shape({
   counselling_date: yup.string().required(),
   counsellor: yup.string().required(),
-  counselling_slot: yup.string().required(),
-  counselling_medium: yup.string().required(),
+  counselling_slot: yup
+    .string()
+    .required('Counselling slot is a required field'),
+  counselling_medium: yup
+    .string()
+    .required('Counselling medium is a required field'),
 });
 
 export default function BookAppointment() {
@@ -38,7 +42,7 @@ export default function BookAppointment() {
     if (Object.keys(bookingData).length > 0) {
       history.push('/');
       setTimeout(() => {
-        dispatch(toastErrorMessage('You already have a pending booking'));
+        dispatch(toastWarningMessage('You already have a pending booking'));
       }, 0);
     }
   }, [bookingData]);
