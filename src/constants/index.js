@@ -1,5 +1,5 @@
-export const clientSecret = '5ZnCvJIKSx0tnblLjzXhWeLfuZDYHSofqDQwjul3';
-export const redirectURI = 'http://13.235.71.70:443/after_login';
+export const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+export const redirectURI = `${process.env.REACT_APP_BASE_URL}/after_login`;
 export const oauthUrl = `https://internet.channeli.in/oauth/authorise/?client_id=${clientSecret}&redirect_uri=${redirectURI}`;
 
 export const counsellingMedium = [
