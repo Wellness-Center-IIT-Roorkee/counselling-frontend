@@ -18,7 +18,10 @@ import { BOOKING_APIS } from '../../urls';
 import { getFormattedDate } from '../../helpers/helperFunctions';
 import { confirmBooking } from '../../actions/bookingActions';
 import validateForm from '../../helpers/validateForm';
-import { toastWarningMessage } from '../../actions/toastActions';
+import {
+  toastInfoMessage,
+  toastWarningMessage,
+} from '../../actions/toastActions';
 
 const schema = yup.object().shape({
   counselling_date: yup.string().required(),
@@ -88,11 +91,19 @@ export default function BookAppointment() {
   };
 
   const handleCounsellorChange = counsellor => {
-    setBooking({
-      ...booking,
-      counsellor: counsellor,
-    });
-    handleNext();
+    if (counsellor.days_available.length > 1) {
+      setBooking({
+        ...booking,
+        counsellor: counsellor,
+      });
+      handleNext();
+    } else {
+      dispatch(
+        toastWarningMessage(
+          `${counsellor.user.name} is not available for booking`
+        )
+      );
+    }
   };
 
   const counsellorList = useSelector(state => state.counsellor.counsellorsData);
