@@ -25,14 +25,6 @@ const LoginModal = ({ open = false, onClose = () => {} }) => {
           />
         </Row>
       </Modal.Body>
-      <Modal.Footer className="justify-content-center">
-        <CustomButton
-          buttonSize="large"
-          color="secondary"
-          variant="text"
-          label="Sign In"
-        />
-      </Modal.Footer>
     </Modal>
   );
 };

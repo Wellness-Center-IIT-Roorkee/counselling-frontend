@@ -6,6 +6,7 @@ import {
   SET_BOOKING,
   BOOKING_API_ERROR,
   GET_BOOKING_PENDING,
+  CANCEL_BOOKING_PENDING,
 } from './bookingActionTypes';
 import { toastErrorMessage, toastSuccessMessage } from './toastActions';
 
@@ -27,6 +28,31 @@ export const confirmBooking = (data, callback) => {
         dispatch(apiDispatch(CREATE_BOOKING_PENDING, false));
         dispatch(
           toastErrorMessage('Some Error occured in Creating Appointment')
+        );
+      });
+  };
+};
+
+export const cancelBooking = (id, callback = () => {}) => {
+  const url = `${BOOKING_APIS.cancelBooking}${id}/cancel_appointment/`;
+  const data = {
+    booking_status: 'CANCELLED',
+  };
+  return dispatch => {
+    dispatch(apiDispatch(CANCEL_BOOKING_PENDING, true));
+    apiClient
+      .patch(url, data)
+      .then(() => {
+        dispatch(apiDispatch(SET_BOOKING, {}));
+        dispatch(apiDispatch(CANCEL_BOOKING_PENDING, false));
+        dispatch(toastSuccessMessage('appointment cancelled'));
+        callback();
+      })
+      .catch(err => {
+        dispatch(apiDispatch(BOOKING_API_ERROR, err.response));
+        dispatch(apiDispatch(CANCEL_BOOKING_PENDING, false));
+        dispatch(
+          toastErrorMessage('Some Error occured in cancelling Appointment')
         );
       });
   };

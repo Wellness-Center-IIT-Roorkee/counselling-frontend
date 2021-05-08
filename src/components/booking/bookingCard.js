@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../helpers/helperFunctions';
 import { useHistory } from 'react-router';
+import CustomButton from '../common/button';
 
 const BookingCard = ({
   className = '',
@@ -15,6 +16,7 @@ const BookingCard = ({
   time = null,
   date = null,
   name = '',
+  onCancelAppointment = () => {},
 }) => {
   const history = useHistory();
   const smbreakpoint = useMediaQuery(theme => theme.breakpoints.up('sm'));
@@ -43,6 +45,17 @@ const BookingCard = ({
           <div>
             <span className="fw-500 text-grey-800">Status:</span>
             <span className="text-grey-600"> Pending</span>
+          </div>
+          <div className="mt-2">
+            <CustomButton
+              color="secondary"
+              variant="contained"
+              label="Cancel Appointment"
+              handleSubmit={e => {
+                onCancelAppointment();
+                e.stopPropagation();
+              }}
+            />
           </div>
         </CardContent>
       </CardActionArea>

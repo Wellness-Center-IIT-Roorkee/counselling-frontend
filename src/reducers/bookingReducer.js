@@ -1,5 +1,6 @@
 import {
   CREATE_BOOKING_PENDING,
+  CANCEL_BOOKING_PENDING,
   SET_BOOKING,
   BOOKING_API_ERROR,
   GET_BOOKING_PENDING,
@@ -21,6 +22,8 @@ const bookingReducer = (state = initialState, action) => {
       return { ...state, createBookingPending: payload };
     case GET_BOOKING_PENDING:
       return { ...state, getBookingPending: payload };
+    case CANCEL_BOOKING_PENDING:
+      return { ...state, cancelBookingPending: payload };
     case BOOKING_API_ERROR:
       return { ...state, error: error };
     default:

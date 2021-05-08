@@ -13,4 +13,5 @@ export const BOOKING_APIS = {
   bookings: '/bookings/',
   booking: '/bookings/booking/',
   availableSlots: '/bookings/available_slots/',
+  cancelBooking: '/bookings/booking/',
 };

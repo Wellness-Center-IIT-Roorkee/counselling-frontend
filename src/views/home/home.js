@@ -3,14 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
+import { cancelBooking } from '../../actions/bookingActions';
 import { toastWarningMessage } from '../../actions/toastActions';
 import illustration from '../../assets/illustrations/Group 6.svg';
 import BookingCard from '../../components/booking/bookingCard';
 import CustomButton from '../../components/common/button';
+import ConfirmModal from '../../components/common/confirmModal';
 import LoginModal from '../../components/home/loginModal';
 
 const Home = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isCancelConfirmModalOpen, setIsCancelConfirmModalOpen] = useState(
+    false
+  );
   const isLoggedIn = useSelector(state => state.users.isLoggedIn);
   const bookingData = useSelector(state => state.booking.bookingData);
   const history = useHistory();
@@ -89,6 +94,9 @@ const Home = () => {
                 name={bookingData.counsellor.user.name}
                 date={bookingData.counselling_date}
                 time={bookingData.counselling_slot.slot}
+                onCancelAppointment={() => {
+                  setIsCancelConfirmModalOpen(true);
+                }}
               />
             ) : (
               ''
@@ -103,6 +111,19 @@ const Home = () => {
         <LoginModal
           open={isLoginModalOpen}
           onClose={() => setIsLoginModalOpen(false)}
+        />
+        <ConfirmModal
+          open={isCancelConfirmModalOpen}
+          onClose={() => {
+            setIsCancelConfirmModalOpen(false);
+          }}
+          onSubmit={() => {
+            dispatch(
+              cancelBooking(bookingData.id, () => {
+                setIsCancelConfirmModalOpen(false);
+              })
+            );
+          }}
         />
       </Row>
     </Container>
