@@ -91,7 +91,7 @@ export default function BookAppointment() {
   };
 
   const handleCounsellorChange = counsellor => {
-    if (counsellor.days_available.length > 1) {
+    if (counsellor.days_available.length > 0) {
       setBooking({
         ...booking,
         counsellor: counsellor,
