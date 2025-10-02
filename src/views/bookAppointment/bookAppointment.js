@@ -109,18 +109,20 @@ export default function BookAppointment() {
   const counsellorList = useSelector(state => state.counsellor.counsellorsData);
   const counsellorListCards =
     counsellorList &&
-    counsellorList.map(counsellor => {
-      return (
-        <CounselorCard
-          key={counsellor.id}
-          name={counsellor.user.name}
-          speciality={counsellor.speciality}
-          image={counsellor.user.display_picture}
-          days={counsellor.days_available}
-          onClick={() => handleCounsellorChange(counsellor)}
-        />
-      );
-    });
+    counsellorList
+      .filter(counsellor => counsellor.days_available.length > 0)
+      .map(counsellor => {
+        return (
+          <CounselorCard
+            key={counsellor.id}
+            name={counsellor.user.name}
+            speciality={counsellor.speciality}
+            image={counsellor.user.display_picture}
+            days={counsellor.days_available}
+            onClick={() => handleCounsellorChange(counsellor)}
+          />
+        );
+      });
 
   function disabledDates(date) {
     const todayDate = new Date();
