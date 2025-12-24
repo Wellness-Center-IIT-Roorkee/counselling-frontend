@@ -42,7 +42,7 @@ export default function BookAppointment() {
   const [curr, setCurr] = useState(Date.now());
 
   useEffect(() => {
-    if (Object.keys(bookingData).length > 0) {
+    if (Object.keys(bookingData).length > 0 && bookingData.student.user.email.toString()!="admin@wellness.com") {
       history.push('/');
       setTimeout(() => {
         dispatch(toastWarningMessage('You already have a pending booking'));
@@ -109,7 +109,9 @@ export default function BookAppointment() {
   const counsellorList = useSelector(state => state.counsellor.counsellorsData);
   const counsellorListCards =
     counsellorList &&
-    counsellorList.map(counsellor => {
+    counsellorList
+    .filter(counsellor => counsellor.days_available.length > 0)
+    .map(counsellor => {
       return (
         <CounselorCard
           key={counsellor.id}
@@ -153,6 +155,21 @@ export default function BookAppointment() {
     });
   };
 
+  // Helper to parse slot start time into minutes since midnight for sorting
+  function parseSlotStartMinutes(slotStr) {
+    // slotStr example: "06:00 PM - 07:00 PM"
+    if (!slotStr || typeof slotStr !== 'string') return Number.MAX_SAFE_INTEGER;
+    const startPart = slotStr.split(' - ')[0].trim();
+    const m = startPart.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+    if (!m) return Number.MAX_SAFE_INTEGER;
+    let hh = parseInt(m[1], 10);
+    const mm = parseInt(m[2], 10);
+    const period = m[3].toUpperCase();
+    if (period === 'AM' && hh === 12) hh = 0;
+    if (period === 'PM' && hh !== 12) hh += 12;
+    return hh * 60 + mm;
+  }
+
   const handleDateChange = date => {
     setBooking({
       ...booking,
@@ -167,7 +184,8 @@ export default function BookAppointment() {
     apiClient
       .post(url, data)
       .then(res => {
-        setSlotOptions([...res.data]);
+      	const availableSlots = res.data.sort((a, b) => parseSlotStartMinutes(a.slot) - parseSlotStartMinutes(b.slot));
+        setSlotOptions([...availableSlots]);
       })
       .catch(err => {});
   };

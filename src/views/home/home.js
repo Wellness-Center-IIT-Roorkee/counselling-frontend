@@ -10,9 +10,11 @@ import BookingCard from '../../components/booking/bookingCard';
 import CustomButton from '../../components/common/button';
 import ConfirmModal from '../../components/common/confirmModal';
 import LoginModal from '../../components/home/loginModal';
+import BookingModal from '../../components/home/bookingModal';
 
 const Home = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isCancelConfirmModalOpen, setIsCancelConfirmModalOpen] = useState(
     false
   );
@@ -22,6 +24,9 @@ const Home = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  console.log(bookingData);
+  console.log(Object.keys(bookingData));
+
   const smbreakpoint = useMediaQuery(theme => theme.breakpoints.up('sm'));
 
   useEffect(() => {
@@ -29,6 +34,7 @@ const Home = () => {
       setIsLoginModalOpen(true);
     }
   }, []);
+
   return (
     <Container>
       <Row className="align-items-center my-auto mt-5 ">
@@ -50,15 +56,57 @@ const Home = () => {
               share any problem.
             </Col>
           </Row>
-          <Row className="mt-4 md-2">
+          <Row className='mt-4 md-2'>
+            <Col>
+              <CustomButton
+                color="secondary"
+                variant="outlined"
+                label="1. Know the counselors"
+                onClick={() =>
+                  window.open('https://wellness.iitr.ac.in/contact-2/')
+                }
+              />
+            </Col>
+          </Row>
+          <Row className="text-black-600">
+            <Col>
+              IT'S URGENT, Want Appointment Today Only:
+            </Col>
+          </Row>
+          <Row className='mt-4 md-2'>
             <Col>
               <CustomButton
                 color="secondary"
                 variant="contained"
-                label="BOOK APPOINTMENT"
+                label="2A. URGENT APPOINTMENT"
                 handleSubmit={() => {
                   isLoggedIn
-                    ? Object.keys(bookingData).length > 0
+                    ? (Object.keys(bookingData).length > 0 && bookingData.student.user.email.toString()!="admin@wellness.com")
+                      ? dispatch(
+                          toastWarningMessage(
+                            'You already have a pending booking'
+                          )
+                        )
+                      : setIsBookingModalOpen(true)
+                    : setIsLoginModalOpen(true);
+                }}
+              />
+            </Col>
+          </Row>
+          <Row className="text-black-600 mt-4 md-2">
+            <Col>
+              Checkout Counsellor's Timing to book appointment:
+            </Col>
+          </Row>
+          <Row className='mt-4 md-2'>
+            <Col>
+              <CustomButton
+                color="secondary"
+                variant="contained"
+                label="2B. APPOINTMENT BOOKING"
+                handleSubmit={() => {
+                  isLoggedIn
+                    ? (Object.keys(bookingData).length > 0 && bookingData.student.user.email.toString()!="admin@wellness.com")
                       ? dispatch(
                           toastWarningMessage(
                             'You already have a pending booking'
@@ -67,16 +115,6 @@ const Home = () => {
                       : history.push('/book_appointment')
                     : setIsLoginModalOpen(true);
                 }}
-              />
-            </Col>
-            <Col>
-              <CustomButton
-                color="secondary"
-                variant="outlined"
-                label="Know the counselors"
-                onClick={() =>
-                  window.open('https://wellness.iitr.ac.in/contact-2/')
-                }
               />
             </Col>
           </Row>
@@ -112,6 +150,10 @@ const Home = () => {
           open={isLoginModalOpen}
           onClose={() => setIsLoginModalOpen(false)}
         />
+        <BookingModal
+          open={isBookingModalOpen}
+          onClose={() => setIsBookingModalOpen(false)}
+        />
         <ConfirmModal
           open={isCancelConfirmModalOpen}
           onClose={() => {
@@ -131,3 +173,4 @@ const Home = () => {
 };
 
 export default Home;
+

@@ -18,7 +18,7 @@ export const confirmBooking = (data, callback) => {
       .post(url, data)
       .then(res => {
         callback();
-        dispatch(apiDispatch(SET_BOOKING, res.data));
+        if(data?.counsellor) dispatch(apiDispatch(SET_BOOKING, res.data));
         dispatch(apiDispatch(CREATE_BOOKING_PENDING, false));
         dispatch(toastSuccessMessage('appointment created'));
       })
